@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react";
 import "./App.css";
 
-
 function App() {
   const [darkMode, setdarkMode] = useState<boolean>(false);
 
@@ -15,8 +14,6 @@ function App() {
   }, [darkMode]);
 
   return (
-    <>
-      {/* <h1 className="text-xl font-bold text-red-500">Tailwindcss setup</h1> */}
       <button
         className="bg-bkg text-content "
         onClick={() => {
@@ -25,7 +22,6 @@ function App() {
       >
         change theme {darkMode ? "dark" : "white"}
       </button>
-    </>
   );
 }
 

@@ -1,0 +1,1 @@
+//fetch | move away from geting the data of a component from a `useEffect` hook to not be in useEffect https://youtu.be/nDGA3km5He4?t=3362
