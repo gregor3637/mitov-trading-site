@@ -1,3 +1,14 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer base {
+  :root {
+    --color-bkg: 200 256 256;
+    --color-content: 0 0 0;
+  }
+  :root[data-theme="dark"] {
+    --color-bkg: 0 0 0;
+    --color-content: 255 0 0;
+  }
+}
