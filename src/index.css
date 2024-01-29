@@ -1,14 +1,63 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+
+*,
+#root {
+    font-family: 'Poppins', sans-serif;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 @layer base {
-  :root {
-    --color-bkg: 200 256 256;
-    --color-content: 0 0 0;
-  }
-  :root[data-theme="dark"] {
-    --color-bkg: 0 0 0;
-    --color-content: 255 0 0;
-  }
+    :root {
+        --body-color: #e4e9f7;
+        --sidebar-color: #fff;
+        --primary-color: #695cfe;
+        --primary-color-light: #d9d5ff;
+        --toggle-color: #ddd;
+        --text-color: #707070;
+
+        --toggle-track: #6b7280;
+        --toggle-head: #f6f5ff;
+
+        --tran-02: all 2.2s ease;
+        --tran-03: all 2.3s ease;
+        --tran-04: all 2.4s ease;
+        --tran-05: all 2.5s ease;
+    }
+    
+    :root[data-theme='dark'] {
+        --body-color: #18191a;
+        --sidebar-color: #242526;
+        --primary-color: #3a3b3c;
+        --primary-color-light: #3a3b3c;
+        --toggle-color: #fff;
+        --text-color: #ccc;
+
+        --toggle-track: #f6f5ff;
+        --toggle-head: #6b7280;
+
+        transition: var(--tran-02);
+    }
+}
+
+body {
+    height: 100vh;
+    background: var(--body-color);
+}
+
+.nav-elem {
+    @apply relative flex items-center px-1 py-2;
+}
+
+.nav-elem-hover {
+    @apply sm:!bg-transparent sm:hover:!bg-[--primary-color-light];
+}
+
+.nav-button {
+    @apply nav-elem rounded-lg bg-[--primary-color-light] transition duration-500;
 }
