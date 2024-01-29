@@ -1,5 +1,6 @@
 import React from "react";
 import { Link, NavLink } from "react-router-dom";
+import imageUrl from "../assets/images/avatar-icon.png";
 
 type Props = {};
 
@@ -39,7 +40,7 @@ const Header = (props: Props) => {
           Vans
         </NavLink>
         <Link to="login" className="login-link">
-          <img src="../assets/images/avatar-icon.png" className="login-icon" />
+          <img src={imageUrl} className="login-icon" />
         </Link>
         <button onClick={fakeLogOut}>X</button>
       </nav>
