@@ -2,6 +2,9 @@ import { redirect } from "react-router-dom";
 import { loginUser } from "./api";
 
 export async function requireAuth(request) {
+  return { token: 'res.token' };
+
+
   const pathname = new URL(request.url).pathname
   // // code is connected with `Login.loader`
   // const isLoggedIn = localStorage.getItem("loggedin");
