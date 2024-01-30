@@ -1,4 +1,5 @@
 import React from 'react'
+import ServiceSection from '../components/ServiceSection'
 
 const Home = () => {
   return (
@@ -20,6 +21,7 @@ const Home = () => {
         <h1>@@@@@@@@@@@@</h1>
         <h1>@@@@@@@@@@@@</h1>
         <h1>@@@@@@@@@@@@</h1>
+        <ServiceSection />
         <h1>@@@@@@@@@@@@</h1>
         <h1>@@@@@@@@@@@@</h1>
         <h1>@@@@@@@@@@@@</h1>

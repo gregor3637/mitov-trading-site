@@ -15,7 +15,7 @@
 @layer base {
     :root {
         --body-color: #e4e9f7;
-        --sidebar-color: #fff;
+        --sidebar-color: #e9e9e9;
         --primary-color: #695cfe;
         --primary-color-light: #d9d5ff;
         --toggle-color: #ddd;
@@ -24,12 +24,15 @@
         --toggle-track: #6b7280;
         --toggle-head: #f6f5ff;
 
+        --investments-bg-from: #ffffff;
+        --investments-bg-to: #cef8fc;
+
         --tran-02: all 2.2s ease;
         --tran-03: all 2.3s ease;
         --tran-04: all 2.4s ease;
         --tran-05: all 2.5s ease;
     }
-    
+
     :root[data-theme='dark'] {
         --body-color: #18191a;
         --sidebar-color: #242526;
@@ -40,6 +43,10 @@
 
         --toggle-track: #f6f5ff;
         --toggle-head: #6b7280;
+        
+        --investments-bg-from: #4f1a7b;
+        --investments-bg-to: #191458;
+
 
         transition: var(--tran-02);
     }
@@ -60,4 +67,67 @@ body {
 
 .nav-button {
     @apply nav-elem rounded-lg bg-[--primary-color-light] transition duration-500;
+}
+
+.investment-card-active {
+    background: radial-gradient(
+        80.36% 80.36% at 18.95% 26.51%,
+        #60dbff 0.56%,
+        #60d5ff 9.37%,
+        #5fc4ff 21.1%,
+        #5da9ff 34.46%,
+        #5a82ff 49.03%,
+        #5751ff 64.42%,
+        #5643ff 68.44%,
+        #563df8 74.32%,
+        #552ee5 82.82%,
+        #5315c6 92.87%,
+        #5200ab 100%
+    );
+    background-size: 150% 150%;
+    animation: none; /* Disable the initial rotation animation */
+    position: relative; /* Set position to relative */
+}
+
+.investment-card-closed {
+    background: radial-gradient(
+        80.36% 80.36% at 18.95% 26.51%,
+        #b4b4b4 0.56%, /* Grayed out #60dbff */
+        #b4b4b4 9.37%, /* Grayed out #60d5ff */
+        #b4b4b4 21.1%, /* Grayed out #5fc4ff */
+        #b4b4b4 34.46%, /* Grayed out #5da9ff */
+        #b4b4b4 49.03%, /* Grayed out #5a82ff */
+        #b4b4b4 64.42%, /* Grayed out #5751ff */
+        #b4b4b4 68.44%, /* Grayed out #5643ff */
+        #b4b4b4 74.32%, /* Grayed out #563df8 */
+        #b4b4b4 82.82%, /* Grayed out #552ee5 */
+        #b4b4b4 92.87%, /* Grayed out #5315c6 */
+        #b4b4b4 100% /* Grayed out #5200ab */
+    );
+    background-size: 150% 150%;
+    animation: none; /* Disable the initial rotation animation */
+    position: relative; /* Set position to relative */
+}
+
+
+
+.ribbon {
+    z-index: 20;
+    --f: 10px; /* control the folded part*/
+    --r: 0px; /* control the ribbon shape */
+    --t: 56px; /* the top offset */
+
+    position: absolute;
+    inset: var(--t) calc(-1 * var(--f)) auto auto;
+    padding: 0 10px var(--f) calc(10px + var(--r));
+    clip-path: polygon(
+        0 0,
+        100% 0,
+        100% calc(100% - var(--f)),
+        calc(100% - var(--f)) 100%,
+        calc(100% - var(--f)) calc(100% - var(--f)),
+        0 calc(100% - var(--f)),
+        var(--r) calc(50% - var(--f) / 2)
+    );
+    box-shadow: 0 calc(-1 * var(--f)) 0 inset #0005;
 }
