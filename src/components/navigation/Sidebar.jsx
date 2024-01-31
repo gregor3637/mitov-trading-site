@@ -22,7 +22,7 @@ const Sidebar = ({ isOpen, onSidebarClose }) => {
     return (
         <div
             className={`
-                absolute h-full 
+                absolute h-full z-[100]
                 sm:static sm:w-[250px]
                 ${isOpen ? '' : 'sm:!w-[100px]'}
           `}
@@ -30,7 +30,7 @@ const Sidebar = ({ isOpen, onSidebarClose }) => {
             <div
                 className={`
                     fixed flex h-[calc(100vh-40px)] w-[250px] flex-col justify-between whitespace-nowrap bg-[--sidebar-color]  p-4
-                    sm:h-full
+                    sm:h-full  border-r-2  border-[--edge]
                     ${isOpen ? '' : '-translate-x-full sm:!w-[100px] sm:translate-x-0'}
                 `}
             >

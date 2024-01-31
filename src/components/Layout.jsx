@@ -15,11 +15,11 @@ const Layout = () => {
     }
 
     return (
-        <div className="site-wrapper flex flex-col">
+        <div>
             <Header isOpen={isNavOpen} setIsOpen={topHandler} />
-            <div className={`mt-[40px] flex sm:mt-0 `}>
+            <div>
                 <Sidebar isOpen={isNavOpen} onSidebarClose={topHandler} />
-                <main className="flex-1">
+                <main className={`${isNavOpen ? 'sm:ml-[250px]' : 'sm:ml-[100px]'}`}>
                     <Outlet />
                     <Footer />
                 </main>
