@@ -12,7 +12,6 @@ const Investments = () => {
         <div className="bg-[--sidebar-color] px-10 pb-10">
             <h1 className="py-10">
                 <span
-                    span
                     className="text-5xl font-extrabold text-[--text-color]"
                 >
                     Ivestments

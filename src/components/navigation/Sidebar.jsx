@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { forwardRef, useEffect, useState } from 'react'
 import { FaCog, FaChartPie, FaRegMoon, FaExpandAlt } from 'react-icons/fa'
 import { ImShrink2 } from 'react-icons/im'
 import { IoSunnySharp } from 'react-icons/io5'
@@ -7,12 +7,11 @@ import SidebarButton from './SidebarButton'
 
 const ICON_SIZE = 20
 
-const Sidebar = ({ isOpen, onSidebarClose }) => {
+const Sidebar = forwardRef(({ isOpen, onSidebarClose }, ref) => {
     const [isDarkMode, setIsDarkMode] = useState(false)
 
     useEffect(() => {
         if (isDarkMode) {
-            // document.documentElement.classList.add("dark");
             document.documentElement.dataset.theme = 'dark'
         } else {
             document.documentElement.dataset.theme = ''
@@ -21,16 +20,17 @@ const Sidebar = ({ isOpen, onSidebarClose }) => {
 
     return (
         <div
+            ref={ref}
             className={`
-                absolute h-full z-[100]
+                absolute z-[100] h-full
                 sm:static sm:w-[250px]
                 ${isOpen ? '' : 'sm:!w-[100px]'}
           `}
         >
             <div
                 className={`
-                    fixed flex h-[calc(100vh-40px)] w-[250px] flex-col justify-between whitespace-nowrap bg-[--sidebar-color]  p-4
-                    sm:h-full  border-r-2  border-[--edge]
+                    fixed flex h-[calc(100vh-40px)] w-[250px] flex-col justify-between whitespace-nowrap border-r-2  border-[--edge]
+                    bg-[--sidebar-color]  p-4  sm:h-full
                     ${isOpen ? '' : '-translate-x-full sm:!w-[100px] sm:translate-x-0'}
                 `}
             >
@@ -93,6 +93,6 @@ const Sidebar = ({ isOpen, onSidebarClose }) => {
             </div>
         </div>
     )
-}
+})
 
 export default Sidebar
