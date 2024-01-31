@@ -6,12 +6,12 @@ import {
     RouterProvider,
 } from 'react-router-dom'
 import Layout from './components/Layout'
-import Home from './pages/Home'
+import Investments from './pages/Investments'
 
 const router = createBrowserRouter(
     createRoutesFromElements(
         <Route path="/" element={<Layout />}>
-            <Route index element={<Home />} />
+            <Route index element={<Investments />} />
             <Route path="about" element={<h1>@VVVVVVVVVVVVV</h1>} />
             <Route path="*" element={<h1>@XXXXXXXXXXXXXXXXX</h1>} />
         </Route>
