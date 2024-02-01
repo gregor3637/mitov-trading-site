@@ -83,6 +83,11 @@ body {
 .nav-button {
     &.active {
         background-color: var(--navigation-button-active-bg) !important;
+
+        div,
+        span {
+            color: #fff !important;
+        }
     }
     @apply nav-elem rounded-lg bg-[--primary-color-light] transition duration-500;
 }
