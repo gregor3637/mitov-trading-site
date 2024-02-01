@@ -1,6 +1,6 @@
 import React from 'react'
 
-const Pangel = ({ children, className, title }) => {
+const Panel = ({ children, className, title }) => {
     return (
         <div
             className={`${className} rounded-xl border-2 border-[--panel-border] bg-gradient-to-r from-[--investments-bg-from] to-[--investments-bg-to] p-4 
@@ -22,4 +22,4 @@ const Pangel = ({ children, className, title }) => {
     )
 }
 
-export default Pangel
+export default Panel

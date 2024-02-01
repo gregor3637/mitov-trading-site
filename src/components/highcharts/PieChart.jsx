@@ -9,13 +9,7 @@ const colors = ['tomato', 'skyblue', 'lightgreen']
 const getPieChartOptions = (investments) => {
     const options = {
         chart: {
-            backgroundColor: {
-                linearGradient: [0, 0, 500, 500],
-                stops: [
-                    [0, 'rgb(255, 255, 255)'],
-                    [1, 'rgb(100, 200, 255)'],
-                ],
-            },
+            backgroundColor: "#bcd0ff",
             polar: true,
             type: 'line',
             animation: false,

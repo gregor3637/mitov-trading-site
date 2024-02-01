@@ -4,8 +4,8 @@ import { investments } from '../server/data'
 import InvestedValue from '../components/InvestedValue'
 import Widget from '../components/Widget'
 import InvestmentsStatus from '../components/InvestmentsStatus'
-import Pangel from '../components/Pangel'
 import InvestmentManagement from '../components/InvestmentManagement'
+import Panel from '../components/Panel'
 
 const Investments = () => {
     return (
@@ -17,7 +17,7 @@ const Investments = () => {
                     Ivestments
                 </span>
             </h1>
-            <Pangel title="Overview">
+            <Panel title="Overview">
                 <div
                     className="widget-container-numbers flex flex-1 flex-col gap-4 
                     md:flex-row sm:justify-between 
@@ -31,15 +31,15 @@ const Investments = () => {
                     </Widget>
                 </div>
                 <div
-                    className="widget-container-piechart w-full overflow-hidden rounded-2xl border-2 border-[--widget-border] bg-green-400 
+                    className="widget-container-piechart w-full overflow-hidden rounded-2xl border-2 border-[--widget-border] bg-[--widget-bg] 
                     lg:w-[70%]"
                 >
                     <PieChart investments={investments} />
                 </div>
-            </Pangel>
-            <Pangel className="mt-5" title="Investment Management">
+            </Panel>
+            <Panel className="mt-5" title="Investment Management">
                 <InvestmentManagement investments={investments} />
-            </Pangel>
+            </Panel>
         </div>
     )
 }

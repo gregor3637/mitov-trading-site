@@ -99,35 +99,35 @@ body {
         #5200ab 100%
     );
     background-size: 150% 150%;
-    animation: none; /* Disable the initial rotation animation */
-    position: relative; /* Set position to relative */
+    animation: none;
+    position: relative;
 }
 
 .investment-card-closed {
     background: radial-gradient(
         80.36% 80.36% at 18.95% 26.51%,
         #b4b4b4 0.56%,
-        /* Grayed out #60dbff */ #b4b4b4 9.37%,
-        /* Grayed out #60d5ff */ #b4b4b4 21.1%,
-        /* Grayed out #5fc4ff */ #b4b4b4 34.46%,
-        /* Grayed out #5da9ff */ #b4b4b4 49.03%,
-        /* Grayed out #5a82ff */ #b4b4b4 64.42%,
-        /* Grayed out #5751ff */ #b4b4b4 68.44%,
-        /* Grayed out #5643ff */ #b4b4b4 74.32%,
-        /* Grayed out #563df8 */ #b4b4b4 82.82%,
-        /* Grayed out #552ee5 */ #b4b4b4 92.87%,
-        /* Grayed out #5315c6 */ #b4b4b4 100% /* Grayed out #5200ab */
+        #b4b4b4 9.37%,
+        #b4b4b4 21.1%,
+        #b4b4b4 34.46%,
+        #b4b4b4 49.03%,
+        #b4b4b4 64.42%,
+        #b4b4b4 68.44%,
+        #b4b4b4 74.32%,
+        #b4b4b4 82.82%,
+        #b4b4b4 92.87%,
+        #b4b4b4 100%
     );
     background-size: 150% 150%;
-    animation: none; /* Disable the initial rotation animation */
-    position: relative; /* Set position to relative */
+    animation: none;
+    position: relative;
 }
 
 .ribbon {
     z-index: 20;
-    --f: 10px; /* control the folded part*/
-    --r: 0px; /* control the ribbon shape */
-    --t: 56px; /* the top offset */
+    --f: 10px;
+    --r: 0px;
+    --t: 56px;
 
     position: absolute;
     inset: var(--t) calc(-1 * var(--f)) auto auto;
