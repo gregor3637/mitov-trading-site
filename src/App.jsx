@@ -6,7 +6,7 @@ import {
     RouterProvider,
 } from 'react-router-dom'
 import Layout from './components/Layout'
-import Investments from './pages/Investments'
+import Investments, { loader as investmentsLoader } from './pages/Investments'
 import Settings, {
     loader as settingsLoader,
     action as settingsAction,
@@ -15,7 +15,7 @@ import Settings, {
 const router = createBrowserRouter(
     createRoutesFromElements(
         <Route path="/" element={<Layout />}>
-            {/* <Route index element={<Investments />} />
+            {/* <Route index element={<Investments />} loader={investmentsLoader} />
             <Route
                 path="settings"
                 element={<Settings />}

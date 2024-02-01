@@ -19,6 +19,9 @@
         --primary-color: #695cfe;
         --primary-color-light: #d9d5ff;
         --toggle-color: #ddd;
+        /* --button-bg: #ddd; */
+        --button-bg: #b6b6b6;
+        --button-bg-hover: #aaaaaa;
         --text-color: #707070;
 
         --toggle-track: #6b7280;
@@ -51,6 +54,7 @@
         --primary-color: #3a3b3c;
         --primary-color-light: #3a3b3c;
         --toggle-color: #fff;
+        --button-bg: #aeaeae;
         --text-color: #ccc;
 
         --toggle-track: #f6f5ff;
@@ -157,4 +161,13 @@ body {
         justify-items: center;
         grid-template-columns: 1fr;
     }
+}
+
+.remove-arrow::-webkit-inner-spin-button,
+.remove-arrow::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+.remove-arrow {
+    -moz-appearance: textfield;
 }

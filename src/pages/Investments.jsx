@@ -1,26 +1,32 @@
 import React from 'react'
+import { useLoaderData } from 'react-router-dom'
 import PieChart from '../components/highcharts/PieChart'
-import { investments } from '../server/data'
 import InvestedValue from '../components/InvestedValue'
 import Widget from '../components/Widget'
 import InvestmentsStatus from '../components/InvestmentsStatus'
 import InvestmentManagement from '../components/InvestmentManagement'
 import Panel from '../components/Panel'
+import { getInvestments } from '../api'
+
+export async function loader() {
+    const investments = await getInvestments()
+    return investments
+}
 
 const Investments = () => {
+    const investments = useLoaderData()
+
     return (
         <div className="bg-[--sidebar-color] px-10 pb-10">
             <h1 className="py-10">
-                <span
-                    className="text-5xl font-extrabold text-[--text-color]"
-                >
+                <span className="text-5xl font-extrabold text-[--text-color]">
                     Ivestments
                 </span>
             </h1>
             <Panel title="Overview">
                 <div
                     className="widget-container-numbers flex flex-1 flex-col gap-4 
-                    md:flex-row sm:justify-between 
+                    sm:justify-between md:flex-row 
                     lg:max-w-[600px] lg:flex-col"
                 >
                     <Widget title="Invested Value:" info="without cash*">

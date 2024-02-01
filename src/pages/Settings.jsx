@@ -3,65 +3,94 @@ import {
     useLoaderData,
     useNavigation,
     Form,
-    redirect,
     useActionData,
 } from 'react-router-dom'
-import { getInvestments,  updateUser } from '../api'
+import { updateUser } from '../api'
 
-export async function loader({ request }) {
-    const investments = await getInvestments()
-    console.log("🚀5%%🚀  ~ loader ~ investments:", investments)
-    return true;
+export async function loader() {
+    return true
 }
-  
 
 export async function action({ request }) {
     const formData = await request.formData()
     const firstName = formData.get('firstName')
     const lastName = formData.get('lastName')
     const age = formData.get('age')
-    const pathname =
-        new URL(request.url).searchParams.get('redirectTo') || '/'
 
     try {
-        // // code is connected with `utils.requireAuth`
-        // const data = await loginUser({ email, password });
-        // localStorage.setItem("loggedin", true);
-        // return redirect(pathname);
+        const data = await updateUser({
+            firstName,
+            lastName,
+            age,
+            email: 'foo@foo.fo',
+        })
 
-        const data = await updateUser({ firstName, lastName, age, email: "foo@foo.fo" })
-        console.log('🚀 ~ action ~ data:', data)
-        console.log('🚀 ~ action ~ pathname:', pathname)
-        let response = redirect(pathname)
-        response.body = true // It's silly, but it works
-        return response
+        return { message: 'Successful update', status: 'ok' }
     } catch (err) {
-        console.log("🚀 ~ action ~ err.message:")
-        return err.message
+        return { message: 'Unsuccessful update', error: err.message }
     }
 }
 
 const Settings = () => {
-    const errorMessage = useActionData()
-    const message = useLoaderData()
+    const actionData = useActionData() || { actionMessage: '' }
+    const loadedMessage = useLoaderData()
     const navigation = useNavigation()
 
-    return (
-        <div className="login-container">
-            <h1>Update your account</h1>
-            {message && <h3 className="red">{message}</h3>}
-            {errorMessage && <h3 className="red">{errorMessage}</h3>}
+    let buttonLabel = 'Update'
+    if (navigation.state === 'submitting') {
+        buttonLabel = 'Submitting...'
+    }
+    if (actionData.status === 'ok') {
+        buttonLabel = 'Success'
+    }
 
-            <Form method="post" className="settings-form" replace>
-                <input name="firstName" type="text" placeholder="First Name" />
-                <input name="lastName" type="text" placeholder="Last Name" />
-                <input name="age" type="number" placeholder="Age" />
-                <button disabled={navigation.state === 'submitting'}>
-                    {navigation.state === 'submitting'
-                        ? 'Submitting...'
-                        : 'Update'}
-                </button>
-            </Form>
+    return (
+        <div className="bg-[--sidebar-color] px-10 pb-10 text-[--text-color]">
+            <h1 className="py-10">
+                <span className="text-5xl font-extrabold text-[--text-color]">
+                    Ivestments
+                </span>
+                <div className="flex flex-col items-center justify-center  pt-10 font-semibold">
+                    <h1 className="text-4xl">Update your account</h1>
+                    {loadedMessage && <h3 className="red">{loadedMessage}</h3>}
+                    {actionData.actionError && (
+                        <h3 className="red">{actionData.actionError}</h3>
+                    )}
+                </div>
+            </h1>
+
+            <div className="h-screen">
+                <Form
+                    method="post"
+                    className="flex flex-col items-center gap-10"
+                    replace
+                >
+                    <div className="mx-auto flex max-w-max flex-col items-center justify-center gap-5  px-10 *:rounded-lg *:p-4">
+                        <input
+                            name="firstName"
+                            type="text"
+                            placeholder="First Name"
+                        />
+                        <input
+                            name="lastName"
+                            type="text"
+                            placeholder="Last Name"
+                        />
+                        <input
+                            name="age"
+                            type="number"
+                            placeholder="Age"
+                            className="remove-arrow appearance-none"
+                        />
+                    </div>
+                    <button
+                        className="max-w-max rounded-lg bg-[--button-bg] px-4 py-2 text-4xl font-semibold hover:bg-[--button-bg-hover] "
+                        disabled={navigation.state === 'submitting'}
+                    >
+                        {buttonLabel}
+                    </button>
+                </Form>
+            </div>
         </div>
     )
 }
