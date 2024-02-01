@@ -26,8 +26,8 @@ export async function action({ request }) {
     // return redirect(pathname);
 
     const data = await loginUser({ email: "foo@foo.fo", password: "bar" });
-    console.log("🚀 ~ action ~ data:", data);
-    console.log("🚀 ~ action ~ pathname:", pathname)
+    console.log("🚀 Login~ action ~ data:", data);
+    console.log("🚀 Login~ action ~ pathname:", pathname)
     let response = redirect(pathname);
     response.body = true; // It's silly, but it works
     return response;

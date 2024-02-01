@@ -30,12 +30,22 @@ import Login, {
   loader as loginLoader,
   action as loginAction,
 } from "./pages/Login";
+import Settings, {
+  loader as settingsLoader,
+  action as settingsAction,
+} from "./pages/Settings";
 import { requireAuth } from "./utils";
 
 
 const router = createBrowserRouter(createRoutesFromElements(
   <Route path="/" element={<Layout />}>
-    <Route index element={<Home />} />
+    <Route
+      index
+      element={<Settings />}
+      loader={settingsLoader}
+      action={settingsAction}
+    />
+    {/* <Route index element={<Home />} /> */}
     <Route path="about" element={<About />} />
     <Route
       path="login"
