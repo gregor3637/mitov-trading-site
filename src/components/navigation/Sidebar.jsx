@@ -7,6 +7,8 @@ import SidebarLayout from './SidebarLayout/SidebarLayout'
 const ICON_SIZE = 20
 
 const Sidebar = forwardRef(({ isOpen, onSidebarClose }, ref) => {
+    // redux theme editing / consuming should be great here but !!!
+    // is redundant because of our awesome sidebar composition
     const [isDarkMode, setIsDarkMode] = useState(false)
 
     useEffect(() => {
