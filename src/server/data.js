@@ -89,3 +89,8 @@ const das = [
         value: '1100',
     },
 ]
+
+export const user = {
+    name: "John",
+    surname: "Smith Jr."
+}
