@@ -2,8 +2,7 @@ import { forwardRef, useEffect, useState } from 'react'
 import { FaCog, FaChartPie, FaRegMoon, FaExpandAlt } from 'react-icons/fa'
 import { ImShrink2 } from 'react-icons/im'
 import { IoSunnySharp } from 'react-icons/io5'
-import { NavLink } from 'react-router-dom'
-import SidebarButton from './SidebarButton'
+import SidebarLayout from './SidebarLayout/SidebarLayout'
 
 const ICON_SIZE = 20
 
@@ -19,78 +18,62 @@ const Sidebar = forwardRef(({ isOpen, onSidebarClose }, ref) => {
     }, [isDarkMode])
 
     return (
-        <div
-            ref={ref}
-            className={`
-                absolute z-[100] h-full
-                sm:static sm:w-[250px]
-                ${isOpen ? '' : 'sm:!w-[100px]'}
-          `}
-        >
-            <div
-                className={`
-                    fixed flex h-[calc(100vh-40px)] w-[250px] flex-col justify-between whitespace-nowrap border-r-2  border-[--edge]
-                    bg-[--sidebar-color]  p-4  sm:h-full
-                    ${isOpen ? '' : '-translate-x-full sm:!w-[100px] sm:translate-x-0'}
-                `}
-            >
-                <div>
-                    <NavLink className={`nav-elem border-b-2 `}>
-                        <div className="flex h-[40px] min-w-[60px] items-center justify-center">
-                            <div className="absolute flex h-[50px] w-[50px] items-center justify-center rounded-xl  text-[--text-color]">
-                                <img
-                                    src="./avatar.png"
-                                    alt=""
-                                    className="w-full"
-                                />
-                            </div>
-                        </div>
-                        <div className="mx-2 ml-2 flex flex-col overflow-hidden text-xl leading-tight text-[--text-color]">
-                            <span>John</span>
-                            <span>Smith Jr.</span>
-                        </div>
-                    </NavLink>
-                    <div className="mt-4">
-                        <SidebarButton
-                            isHoverable
-                            left={<FaChartPie size={ICON_SIZE} />}
-                            right="Investments"
+        <div ref={ref}>
+            <SidebarLayout
+                isOpen={isOpen}
+                avatar={<SidebarLayout.Avatar />}
+                topButtons={
+                    <SidebarLayout.Link to="/">
+                        <SidebarLayout.ButtonIcon
+                            icon={<FaChartPie size={ICON_SIZE} />}
                         />
-                    </div>
-                </div>
-
-                <div className="flex flex-col gap-4">
-                    <SidebarButton
-                        isHoverable
-                        left={<FaCog size={ICON_SIZE} />}
-                        right="Settings"
-                    />
-                    <div className="hidden sm:block">
-                        <SidebarButton
+                        <SidebarLayout.ButtonLabel label="Investments" />
+                    </SidebarLayout.Link>
+                }
+                bottomButtons={
+                    <>
+                        <SidebarLayout.Link to="settings">
+                            <SidebarLayout.ButtonIcon
+                                icon={<FaCog size={ICON_SIZE} />}
+                            />
+                            <SidebarLayout.ButtonLabel label="Settings" />
+                        </SidebarLayout.Link>
+                        <SidebarLayout.Button
                             onClick={onSidebarClose}
-                            left={
-                                isOpen ? (
-                                    <ImShrink2 size={30} />
-                                ) : (
-                                    <FaExpandAlt size={30} />
-                                )
-                            }
-                            right={isDarkMode ? 'Expand' : 'Collapse'}
-                        />
-                    </div>
-                    <SidebarButton
-                        onClick={() => setIsDarkMode((v) => !v)}
-                        left={
-                            isDarkMode ? (
-                                <IoSunnySharp size={ICON_SIZE} />
-                            ) : (
-                                <FaRegMoon size={ICON_SIZE} />
-                            )
-                        }
-                        right={`${isDarkMode ? 'Light' : 'Dark'} Mode`}
-                    />
-                </div>
-            </div>
+                            className="!hidden sm:!flex"
+                        >
+                            <SidebarLayout.ButtonIcon
+                                icon={
+                                    isOpen ? (
+                                        <ImShrink2 size={ICON_SIZE} />
+                                    ) : (
+                                        <FaExpandAlt size={ICON_SIZE} />
+                                    )
+                                }
+                            />
+                            <SidebarLayout.ButtonLabel
+                                label={isDarkMode ? 'Expand' : 'Collapse'}
+                            />
+                        </SidebarLayout.Button>
+                        <SidebarLayout.Button
+                            onClick={() => setIsDarkMode((v) => !v)}
+                        >
+                            <SidebarLayout.ButtonIcon
+                                icon={
+                                    isDarkMode ? (
+                                        <IoSunnySharp size={ICON_SIZE} />
+                                    ) : (
+                                        <FaRegMoon size={ICON_SIZE} />
+                                    )
+                                }
+                            />
+                            <SidebarLayout.ButtonLabel
+                                label={`${isDarkMode ? 'Light' : 'Dark'} Mode`}
+                            />
+                        </SidebarLayout.Button>
+                    </>
+                }
+            />
         </div>
     )
 })
