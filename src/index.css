@@ -41,6 +41,11 @@
 
         --navigation-button-active-bg: #4b3bff;
 
+        --primary-button-color: #fff;
+        --primary-button-round: 4px;
+        --primary-button-borderColor: #7e7e7e;
+        --primary-button-textColor: #2f2f2f;
+
         --tran-02: all 2.2s ease;
         --tran-03: all 2.3s ease;
         --tran-04: all 2.4s ease;
@@ -62,6 +67,11 @@
 
         --investments-bg-from: #4f1a7b;
         --investments-bg-to: #191458;
+
+        
+        --primary-button-color: transparent;
+        --primary-button-borderColor: #fff;
+        --primary-button-textColor: #ffffff;
 
         transition: var(--tran-02);
     }
