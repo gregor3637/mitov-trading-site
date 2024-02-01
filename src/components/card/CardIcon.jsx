@@ -1,6 +1,8 @@
 import React from 'react'
 
-const options = {
+export const OPTION_NOT_PICKED_VALUE = 'undecided'
+
+export const OPTIONS = {
     cash: {
         icon: './investment/cash.png',
         backgroundClass: 'bg-gray-900',
@@ -25,7 +27,7 @@ const options = {
         icon: './investment/land.png',
         backgroundClass: 'bg-amber-900',
     },
-    undecided: {
+    [OPTION_NOT_PICKED_VALUE]: {
         icon: './investment/undecided.png',
         backgroundClass: 'bg-transparent',
     },
@@ -34,11 +36,10 @@ const options = {
 const CardIcon = ({ type }) => {
     return (
         <div
-            className={`flex h-12 w-12 items-center justify-center rounded-md ${options[type.toLowerCase()].backgroundClass}`}
+            className={`flex h-12 w-12 items-center justify-center rounded-md ${OPTIONS[type.toLowerCase()].backgroundClass}`}
         >
             <img
-                // src={options['land'].icon}
-                src={options[type.toLowerCase()].icon}
+                src={OPTIONS[type.toLowerCase()].icon}
                 alt=""
                 className={`w-[80%] brightness-0 invert`}
             />

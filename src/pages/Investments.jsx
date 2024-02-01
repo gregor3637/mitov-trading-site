@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { useLoaderData } from 'react-router-dom'
 import PieChart from '../components/highcharts/PieChart'
 import InvestedValue from '../components/InvestedValue'
@@ -16,14 +16,13 @@ export async function loader() {
 
 const Investments = () => {
     const investments = useLoaderData()
+    const [isInvestmentModalOpen, setIsInvestmentModalOpen] = useState(false)
 
-    const closeHandler = () => {
-        console.log("🚀 ~ closeHandler ~ closeHandler:", closeHandler)
-    }
+    const handleCloseModal = () => setIsInvestmentModalOpen(false)
 
     return (
         <>
-            { <NewInvestmentModal onClose={closeHandler}  data={investments[0]}/>}
+            {isInvestmentModalOpen && <NewInvestmentModal onClose={handleCloseModal}  data={investments[0]}/>}
             <div className="bg-[--sidebar-color] px-10 pb-10">
                 <h1 className="py-10">
                     <span className="text-5xl font-extrabold text-[--text-color]">

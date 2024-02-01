@@ -1,48 +1,16 @@
 import React, { useState } from 'react'
 import Card from '../../card/Card'
-
-const investmentOptions = {
-    cash: {
-        icon: './investment/cash.png',
-        backgroundClass: 'bg-gray-900',
-    },
-    crypto: {
-        icon: './investment/bitcoin.png',
-        backgroundClass: 'bg-red-600',
-    },
-    stocks: {
-        icon: './investment/stocks.png',
-        backgroundClass: 'bg-green-900',
-    },
-    gold: {
-        icon: './investment/gold.png',
-        backgroundClass: 'bg-yellow-600',
-    },
-    property: {
-        icon: './investment/property.png',
-        backgroundClass: 'bg-blue-700',
-    },
-    land: {
-        icon: './investment/land.png',
-        backgroundClass: 'bg-amber-900',
-    },
-    undecided: {
-        icon: './investment/undecided.png',
-        backgroundClass: 'bg-transparent',
-    },
-}
+import { OPTION_NOT_PICKED_VALUE, OPTIONS } from '../../card/CardIcon'
 
 const NewInvestment = ({ onClose, investmentData }) => {
     console.log('🚀 ~ NewInvestment ~ investmentData:', investmentData)
     const [name, setName] = useState('value')
     const [value, setValue] = useState(0)
-    const [type, setType] = useState('undecided')
+    const [type, setType] = useState(OPTION_NOT_PICKED_VALUE)
 
     const handleNameChange = (ev) => setName(ev.target.value)
     const handleTypeChange = (ev) => setType(ev.target.value)
     const handleValueChange = (ev) => setValue(ev.target.value)
-
-    handleValueChange
 
     return (
         <div className="fixed right-0 top-20 z-50 h-[80vh] w-1/2 -translate-x-1/2 transform items-center justify-center rounded-lg bg-[--body-color]  p-4 ">
@@ -56,7 +24,7 @@ const NewInvestment = ({ onClose, investmentData }) => {
                             isActive={investmentData.status === 'active'}
                             name={name}
                             date={investmentData.date}
-                            icon={<Card.Icon type={'gold'}/>}
+                            icon={<Card.Icon type={type} />}
                             value={value}
                         />
                     </div>
@@ -72,13 +40,15 @@ const NewInvestment = ({ onClose, investmentData }) => {
                                 name="type"
                                 onChange={handleTypeChange}
                                 placeholder="undecided"
-                                className='w-full px'
+                                className="px w-full"
                             >
                                 <option value="" disabled selected hidden>
                                     Type
                                 </option>
-                                {Object.keys(investmentOptions)
-                                    .filter((x) => x !== 'undecided')
+                                {Object.keys(OPTIONS)
+                                    .filter(
+                                        (x) => x !== OPTION_NOT_PICKED_VALUE
+                                    )
                                     .map((option) => (
                                         <option key={option} value={option}>
                                             {option.charAt(0).toUpperCase() +
@@ -98,7 +68,9 @@ const NewInvestment = ({ onClose, investmentData }) => {
                 </div>
                 <div className="flex gap-10">
                     <button className="primary-button">Open</button>
-                    <button className="secondary-button" onClick={onClose}>Close</button>
+                    <button className="secondary-button" onClick={onClose}>
+                        Close
+                    </button>
                 </div>
             </div>
         </div>
