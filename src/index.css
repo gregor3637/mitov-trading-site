@@ -68,13 +68,24 @@
         --investments-bg-from: #4f1a7b;
         --investments-bg-to: #191458;
 
-        
         --primary-button-color: transparent;
         --primary-button-borderColor: #fff;
         --primary-button-textColor: #ffffff;
 
         transition: var(--tran-02);
     }
+}
+
+.button {
+    @apply rounded-[--primary-button-round] px-4 py-2 text-3xl font-semibold uppercase;
+}
+
+.primary-button {
+    @apply button border-2 border-[--primary-button-borderColor]  bg-[--primary-button-color] text-[--primary-button-textColor];
+}
+
+.secondary-button {
+    @apply button text-gray-600 border-2 border-gray-600 ;
 }
 
 body {
