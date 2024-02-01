@@ -24,9 +24,8 @@ export async function loader() {
 const Investments = () => {
     const investments = useLoaderData()
     const dispatch = useDispatch()
-
     const handleOpenNewInvestment = () => dispatch(setIsNewInvestmentOpen(true))
-    const handleCloseExistingInvestment = () => handleOpenNewInvestment(false)
+    const handleCloseExistingInvestment = () => dispatch(setIsCloseInvestmentOpen(true))
 
     return (
         <>

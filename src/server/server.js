@@ -31,14 +31,14 @@ createServer({
             name: 'Gamble',
             value: '100',
         })
-        // server.create('investment', {
-        //     id: '3',
-        //     type: 'Gold',
-        //     status: 'active',
-        //     date: '03/02/2023',
-        //     name: 'Child College fund',
-        //     value: '50',
-        // })
+        server.create('investment', {
+            id: '3',
+            type: 'Gold',
+            status: 'closed',
+            date: '03/02/2023',
+            name: 'Child College fund',
+            value: '50',
+        })
         // server.create('investment', {
         //     id: '4',
         //     type: 'Crypto',
@@ -104,23 +104,6 @@ createServer({
         this.timing = 1000
         this.passthrough('https://firestore.googleapis.com/**')
 
-        this.get('/investments', (schema, request) => {
-            return schema.investments.all()
-        })
-
-        this.post('/new-investment', (schema, request) => {
-            const req = JSON.parse(request.requestBody)
-            const newInvestment = { status: 'active', ...req }
-
-            const items = schema.investments.create(newInvestment)
-
-            return {
-                message: 'Investment Successfully Opened',
-                items: items,
-                ok: true,
-            }
-        })
-
         this.post('/update-user', (schema, request) => {
             const { firstName, lastName, age, email } = JSON.parse(
                 request.requestBody
@@ -138,6 +121,33 @@ createServer({
             return {
                 user: foundUser,
                 message: 'Account Updated',
+            }
+        })
+
+        this.get('/investments', (schema, request) => {
+            return schema.investments.all()
+        })
+
+        this.post('/new-investment', (schema, request) => {
+            const req = JSON.parse(request.requestBody)
+            const newInvestment = { status: 'active', ...req }
+
+            const items = schema.investments.create(newInvestment)
+
+            return {
+                message: 'Investment Successfully Opened',
+                items: items,
+                ok: true,
+            }
+        })
+
+        this.patch('/close-investments', function (schema, request) {
+            const req = JSON.parse(request.requestBody)
+            const item = schema.investments.find(req.id).update({status: 'closed'})
+            return {
+                message: 'Investment Successfully Closed',
+                item: item,
+                ok: true,
             }
         })
     },

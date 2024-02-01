@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import Card from '../../card/Card'
 import { OPTION_NOT_PICKED_VALUE, OPTIONS } from '../../card/CardIcon'
 import { formatDate } from '../../../utils/date'
-import { setNewInvestment } from '../../../api'
+import { addInvestment } from '../../../api'
 import { useNavigate } from 'react-router-dom'
 
 const NewInvestment = ({ onClose }) => {
@@ -25,7 +25,7 @@ const NewInvestment = ({ onClose }) => {
 
         setLoading(true)
         try {
-            const response = await setNewInvestment({
+            const response = await addInvestment({
                 name,
                 value,
                 type,

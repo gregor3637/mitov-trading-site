@@ -1,38 +1,35 @@
 import React, { useState } from 'react'
 import Card from '../../card/Card'
-import { setNewInvestment } from '../../../api'
+import { closeInvestment } from '../../../api'
 import { useNavigate } from 'react-router-dom'
 
-const CloseInvestment = ({ onClose, closingInvestmentData }) => {
-    console.log("🚀 ~ CloseInvestment ~ closingInvestmentData:", closingInvestmentData)
-    const { type, status, ...rest } = closingInvestmentData
-    const [didCreate, setDidCreate] = useState(false)
+const CloseInvestment = ({ onClose, invData }) => {
+    const [isSuccessfulClose, setIsSuccessfulClose] = useState(false)
+    const [error, setError] = useState('')
     const [isLoading, setLoading] = useState(false)
     const navigate = useNavigate()
 
-    const handleOpenNewInvestment = async () => {
-        // if (![name, value, type].every(Boolean)) {
-        //     return
-        // }
-        // setLoading(true)
-        // try {
-        //     const response = await setNewInvestment({
-        //         name,
-        //         value,
-        //         type,
-        //         date,
-        //     })
-        //     if (!response.ok) {
-        //         throw new Error('Network response was not ok')
-        //     }
-        //     setDidCreate(true)
-        //     navigate('/')
-        // } catch (error) {
-        //     return error
-        // } finally {
-        //     setLoading(false)
-        // }
+    const handleClosingInvestment = async () => {
+        setLoading(true)
+        setError('')
+        try {
+            const response = await closeInvestment({
+                id: invData.id,
+            })
+            if (!response.ok) {
+                throw new Error('Network response was not ok')
+            }
+            setIsSuccessfulClose(true)
+            navigate('/')
+        } catch (error) {
+            setError(error)
+            return error
+        } finally {
+            setLoading(false)
+        }
     }
+
+    const showCard = invData && !error && !isSuccessfulClose
 
     return (
         <div className="fixed right-0 top-20 z-50 h-[80vh] w-1/2 -translate-x-1/2 transform items-center justify-center rounded-lg bg-[--body-color]  p-4 ">
@@ -42,19 +39,27 @@ const CloseInvestment = ({ onClose, closingInvestmentData }) => {
                         <h1 className="pb-20 text-3xl font-semibold">
                             Closing Investment:
                         </h1>
-                        <Card
-                            icon={<Card.Icon type={type} />}
-                            status={<Card.Status />}
-                            {...rest}
-                        />
+                        {showCard && (
+                            <Card
+                                icon={<Card.Icon type={invData.type} />}
+                                status={<Card.Status status={invData.status} />}
+                                name={invData.name}
+                                date={invData.date}
+                                value={invData.value}
+                            />
+                        )}
+                        {isLoading && <h1>Loading .... </h1>}
+                        {isSuccessfulClose && (
+                            <h1>Investment Successfully Closed</h1>
+                        )}
                     </div>
                 </div>
                 <div className="flex gap-10">
-                    {!isLoading && !didCreate && (
+                    {!isLoading && !isSuccessfulClose && (
                         <>
                             <button
                                 className="primary-button"
-                                onClick={handleOpenNewInvestment}
+                                onClick={handleClosingInvestment}
                             >
                                 Close Investment
                             </button>
@@ -66,10 +71,10 @@ const CloseInvestment = ({ onClose, closingInvestmentData }) => {
                             </button>
                         </>
                     )}
-                    {isLoading && <div>Loading .... </div>}
-                    {!isLoading && didCreate && (
+
+                    {!isLoading && isSuccessfulClose && (
                         <button className="secondary-button" onClick={onClose}>
-                            Investment Closed
+                            Back To Investment Management
                         </button>
                     )}
                 </div>

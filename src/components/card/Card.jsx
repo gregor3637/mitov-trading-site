@@ -17,7 +17,15 @@ const mouseHandle = (event) => {
     planetBackground.style.backgroundPosition = `${backgroundPosX}% ${backgroundPosY}%`
 }
 
-const Card = ({ name, date, icon, value, isActive = true, status }) => {
+const Card = ({
+    name,
+    date,
+    icon,
+    value,
+    isActive = true,
+    status,
+    onClick,
+}) => {
     return (
         <div
             className={`${isActive ? 'investment-card-active cursor-pointer' : 'investment-card-closed'} relative flex min-h-[240px] w-[300px] min-w-[200px]  max-w-[600px] flex-col justify-between rounded-lg p-3 shadow-sm
@@ -25,10 +33,10 @@ const Card = ({ name, date, icon, value, isActive = true, status }) => {
             md:w-[400px]
             `}
             onMouseMove={isActive ? mouseHandle : null}
+            onClick={isActive ? onClick : null}
         >
             {status}
             {icon}
-            {/* <CardIcon type={'gold'.toLowerCase()} /> */}
             <div>
                 <h4
                     className="text-center text-5xl font-medium text-gray-900

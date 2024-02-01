@@ -4,20 +4,30 @@ import { useClickAway, useWindowSize } from '@uidotdev/usehooks'
 import Footer from './navigation/Footer'
 import Header from './navigation/Header'
 import Sidebar from './navigation/Sidebar'
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
+import {
+    selectModalState,
+    setIsCloseInvestmentOpen,
+    setIsNewInvestmentOpen,
+} from '../redux/reducers/modalSlice'
+import NewInvestmentModal from '../components/modal/NewInvestment/NewInvestmentModal'
+import CloseInvestmentModal from '../components/modal/closeInvestment/CloseInvestmentModal'
 
 const width = window.innerWidth
 const SMALL_SCREEN_WIDTH = 640
 
 const Layout = () => {
     const [isNavOpen, setIsNavOpen] = useState(width > SMALL_SCREEN_WIDTH)
-    const {isNewInvestmentOpen, isCloseInvestmentOpen} = useSelector(selectModalState)
     const size = useWindowSize()
     const ref = useClickAway(() => {
         if (size.width < 640) {
             setIsNavOpen(false)
         }
     })
+
+    const { isNewInvestmentOpen, isCloseInvestmentOpen, closingInvestment } =
+        useSelector(selectModalState)
+    const dispatch = useDispatch()
 
     const topHandler = () => {
         setIsNavOpen((v) => !v)
@@ -26,12 +36,14 @@ const Layout = () => {
     return (
         <div>
             {isNewInvestmentOpen && (
-                <NewInvestmentModal onClose={handleCloseModal} />
+                <NewInvestmentModal
+                    onClose={() => dispatch(setIsNewInvestmentOpen(false))}
+                />
             )}
             {isCloseInvestmentOpen && (
                 <CloseInvestmentModal
-                    onClose={handleCloseModal}
-                    closingInvestmentData={investments[0]}
+                    onClose={() => dispatch(setIsCloseInvestmentOpen(false))}
+                    invData={closingInvestment}
                 />
             )}
             <Header isOpen={isNavOpen} setIsOpen={topHandler} />

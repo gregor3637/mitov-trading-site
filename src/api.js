@@ -21,7 +21,7 @@ export async function getInvestments() {
     const res = await fetch('/api/investments')
     if (!res.ok) {
         throw {
-            message: 'failed to fetch Investments',
+            message: 'Failed to fetch Investments',
             statusText: res.statusText,
             status: res.status,
         }
@@ -31,7 +31,7 @@ export async function getInvestments() {
     return data.investments
 }
 
-export async function setNewInvestment(creds) {
+export async function addInvestment(creds) {
     const res = await fetch('/api/new-investment', {
         method: 'post',
         body: JSON.stringify(creds),
@@ -39,7 +39,25 @@ export async function setNewInvestment(creds) {
 
     if (!res.ok) {
         throw {
-            message: 'failed to create  Investment',
+            message: 'Failed to create Investment',
+            statusText: res.statusText,
+            status: res.status,
+        }
+    }
+
+    const data = await res.json()
+    return data
+}
+
+export async function closeInvestment(creds) {
+    const res = await fetch('/api/close-investments', {
+        method: 'patch',
+        body: JSON.stringify(creds),
+    })
+
+    if (!res.ok) {
+        throw {
+            message: 'Failed to close Investment',
             statusText: res.statusText,
             status: res.status,
         }
