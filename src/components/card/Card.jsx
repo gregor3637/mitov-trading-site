@@ -1,5 +1,7 @@
 import React from 'react'
-import { compressBigNumbers } from '../utils/portfolio'
+import { compressBigNumbers } from '../../utils/portfolio'
+import CardStatus from './CardStatus'
+import CardIcon from './CardIcon'
 
 const mouseHandle = (event) => {
     const planetBackground = event.currentTarget
@@ -15,7 +17,7 @@ const mouseHandle = (event) => {
     planetBackground.style.backgroundPosition = `${backgroundPosX}% ${backgroundPosY}%`
 }
 
-const Card = ({ name, date, image, value, isActive }) => {
+const Card = ({ name, date, icon, value, isActive, status }) => {
     return (
         <div
             className={`${isActive ? 'investment-card-active cursor-pointer' : 'investment-card-closed'} relative flex min-h-[240px] w-[300px] min-w-[200px]  max-w-[600px] flex-col justify-between rounded-lg p-3 shadow-sm
@@ -24,19 +26,9 @@ const Card = ({ name, date, image, value, isActive }) => {
             `}
             onMouseMove={isActive ? mouseHandle : null}
         >
-            <div
-                className={`absolute right-0 flex w-1/2 translate-x-[10px] justify-center ${isActive ? 'bg-white' : 'bg-gray-700'} py-1`}
-            >
-                <span
-                    className={`text-3xl font-extrabold capitalize  ${isActive ? '' : 'text-white'}`}
-                >
-                    {isActive ? 'Open' : 'Closed'}
-                </span>
-            </div>
-            <div
-                className={`ribbon ${isActive ? 'bg-white' : 'bg-gray-900'}`}
-            ></div>
-            {image}
+            {status}
+            {icon}
+            {/* <CardIcon type={'gold'.toLowerCase()} /> */}
             <div>
                 <h4
                     className="text-center text-5xl font-medium text-gray-900
@@ -64,5 +56,8 @@ const Card = ({ name, date, image, value, isActive }) => {
         </div>
     )
 }
+
+Card.Status = CardStatus
+Card.Icon = CardIcon
 
 export default Card
