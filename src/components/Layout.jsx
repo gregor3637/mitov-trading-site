@@ -4,12 +4,14 @@ import { useClickAway, useWindowSize } from '@uidotdev/usehooks'
 import Footer from './navigation/Footer'
 import Header from './navigation/Header'
 import Sidebar from './navigation/Sidebar'
+import { useSelector } from 'react-redux'
 
 const width = window.innerWidth
 const SMALL_SCREEN_WIDTH = 640
 
 const Layout = () => {
     const [isNavOpen, setIsNavOpen] = useState(width > SMALL_SCREEN_WIDTH)
+    const {isNewInvestmentOpen, isCloseInvestmentOpen} = useSelector(selectModalState)
     const size = useWindowSize()
     const ref = useClickAway(() => {
         if (size.width < 640) {
@@ -23,6 +25,15 @@ const Layout = () => {
 
     return (
         <div>
+            {isNewInvestmentOpen && (
+                <NewInvestmentModal onClose={handleCloseModal} />
+            )}
+            {isCloseInvestmentOpen && (
+                <CloseInvestmentModal
+                    onClose={handleCloseModal}
+                    closingInvestmentData={investments[0]}
+                />
+            )}
             <Header isOpen={isNavOpen} setIsOpen={topHandler} />
             <div>
                 <Sidebar

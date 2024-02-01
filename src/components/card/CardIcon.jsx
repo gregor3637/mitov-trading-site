@@ -34,6 +34,7 @@ export const OPTIONS = {
 }
 
 const CardIcon = ({ type }) => {
+    type = type || OPTION_NOT_PICKED_VALUE;
     return (
         <div
             className={`flex h-12 w-12 items-center justify-center rounded-md ${OPTIONS[type.toLowerCase()].backgroundClass}`}

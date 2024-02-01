@@ -1,13 +1,20 @@
 import React, { useState } from 'react'
 import { useLoaderData } from 'react-router-dom'
+import { useDispatch, useSelector } from 'react-redux'
 import PieChart from '../components/highcharts/PieChart'
 import InvestedValue from '../components/InvestedValue'
 import Widget from '../components/Widget'
 import InvestmentsStatus from '../components/InvestmentsStatus'
 import InvestmentManagement from '../components/InvestmentManagement'
-import Panel from '../components/Panel'
+import Panel from '../components/panel/Panel'
 import { getInvestments } from '../api'
 import NewInvestmentModal from '../components/modal/NewInvestment/NewInvestmentModal'
+import CloseInvestmentModal from '../components/modal/closeInvestment/CloseInvestmentModal'
+import {
+    selectModalState,
+    setIsNewInvestmentOpen,
+    setIsCloseInvestmentOpen,
+} from '../redux/reducers/modalSlice'
 
 export async function loader() {
     const investments = await getInvestments()
@@ -16,13 +23,13 @@ export async function loader() {
 
 const Investments = () => {
     const investments = useLoaderData()
-    const [isInvestmentModalOpen, setIsInvestmentModalOpen] = useState(false)
+    const dispatch = useDispatch()
 
-    const handleCloseModal = () => setIsInvestmentModalOpen(false)
+    const handleOpenNewInvestment = () => dispatch(setIsNewInvestmentOpen(true))
+    const handleCloseExistingInvestment = () => handleOpenNewInvestment(false)
 
     return (
         <>
-            {isInvestmentModalOpen && <NewInvestmentModal onClose={handleCloseModal}  data={investments[0]}/>}
             <div className="bg-[--sidebar-color] px-10 pb-10">
                 <h1 className="py-10">
                     <span className="text-5xl font-extrabold text-[--text-color]">
@@ -49,8 +56,17 @@ const Investments = () => {
                         <PieChart investments={investments} />
                     </div>
                 </Panel>
-                <Panel className="mt-5" title="Investment Management">
-                    <InvestmentManagement investments={investments} />
+                <Panel
+                    className="mt-5"
+                    title="Investment Management"
+                    button={<Panel.Button onClick={handleOpenNewInvestment} />}
+                >
+                    <InvestmentManagement
+                        investments={investments}
+                        onCloseExistingInvestment={
+                            handleCloseExistingInvestment
+                        }
+                    />
                 </Panel>
             </div>
         </>

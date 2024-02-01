@@ -1,9 +1,9 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
 import Backdrop from '../Backdrop'
-import NewInvestment from './NewInvestment'
+import CloseInvestment from './CloseInvestment'
 
-const NewInvestmentModal = ({ onClose, ...rest }) => {
+const CloseInvestmentModal = ({ onClose, ...rest }) => {
     return (
         <>
             {ReactDOM.createPortal(
@@ -11,11 +11,12 @@ const NewInvestmentModal = ({ onClose, ...rest }) => {
                 document.getElementById('backdrop-root')
             )}
             {ReactDOM.createPortal(
-                <NewInvestment onClose={onClose} {...rest} />,
+                <CloseInvestment onClose={onClose} {...rest} />,
                 document.getElementById('overlay-root')
             )}
         </>
     )
 }
 
-export default NewInvestmentModal
+export default CloseInvestmentModal
+

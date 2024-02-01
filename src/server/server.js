@@ -31,71 +31,71 @@ createServer({
             name: 'Gamble',
             value: '100',
         })
-        server.create('investment', {
-            id: '3',
-            type: 'Gold',
-            status: 'active',
-            date: '03/02/2023',
-            name: 'Child College fund',
-            value: '50',
-        })
-        server.create('investment', {
-            id: '4',
-            type: 'Crypto',
-            status: 'active',
-            date: '03/02/2023',
-            name: 'I feel lucky',
-            value: '10',
-        })
-        server.create('investment',{
-            id: '5',
-            type: 'Land',
-            status: 'closed',
-            date: '03/02/2023',
-            name: 'Land Two',
-            value: '1000',
-        })
-        server.create('investment', {
-            id: '6',
-            type: 'Crypto',
-            status: 'active',
-            date: '03/02/2023',
-            name: 'Does it even matter at the endddddddddddddddd',
-            value: '40',
-        })
-        server.create('investment', {
-            id: '7',
-            type: 'Cash',
-            status: 'active',
-            date: '03/02/2023',
-            name: 'Emergency',
-            value: '1100',
-        })
+        // server.create('investment', {
+        //     id: '3',
+        //     type: 'Gold',
+        //     status: 'active',
+        //     date: '03/02/2023',
+        //     name: 'Child College fund',
+        //     value: '50',
+        // })
+        // server.create('investment', {
+        //     id: '4',
+        //     type: 'Crypto',
+        //     status: 'active',
+        //     date: '03/02/2023',
+        //     name: 'I feel lucky',
+        //     value: '10',
+        // })
+        // server.create('investment', {
+        //     id: '5',
+        //     type: 'Land',
+        //     status: 'closed',
+        //     date: '03/02/2023',
+        //     name: 'Land Two',
+        //     value: '1000',
+        // })
+        // server.create('investment', {
+        //     id: '6',
+        //     type: 'Crypto',
+        //     status: 'active',
+        //     date: '03/02/2023',
+        //     name: 'Does it even matter at the endddddddddddddddd',
+        //     value: '40',
+        // })
+        // server.create('investment', {
+        //     id: '7',
+        //     type: 'Cash',
+        //     status: 'active',
+        //     date: '03/02/2023',
+        //     name: 'Emergency',
+        //     value: '1100',
+        // })
 
-        server.create('investment', {
-            id: '8',
-            type: 'Crypto',
-            status: 'active',
-            date: '03/02/2023',
-            name: 'I feel lucky',
-            value: '10',
-        })
-        server.create('investment', {
-            id: '9',
-            type: 'Property',
-            status: 'active',
-            date: '03/02/2023',
-            name: 'I feel lucky',
-            value: '50',
-        })
-        server.create('investment', {
-            id: '10',
-            type: 'Stocks',
-            status: 'closed',
-            date: '03/02/2023',
-            name: 'Casino money',
-            value: '250',
-        })
+        // server.create('investment', {
+        //     id: '8',
+        //     type: 'Crypto',
+        //     status: 'active',
+        //     date: '03/02/2023',
+        //     name: 'I feel lucky',
+        //     value: '10',
+        // })
+        // server.create('investment', {
+        //     id: '9',
+        //     type: 'Property',
+        //     status: 'active',
+        //     date: '03/02/2023',
+        //     name: 'I feel lucky',
+        //     value: '50',
+        // })
+        // server.create('investment', {
+        //     id: '10',
+        //     type: 'Stocks',
+        //     status: 'closed',
+        //     date: '03/02/2023',
+        //     name: 'Casino money',
+        //     value: '250',
+        // })
     },
 
     routes() {
@@ -103,9 +103,22 @@ createServer({
         this.logging = false
         this.timing = 1000
         this.passthrough('https://firestore.googleapis.com/**')
-        
+
         this.get('/investments', (schema, request) => {
             return schema.investments.all()
+        })
+
+        this.post('/new-investment', (schema, request) => {
+            const req = JSON.parse(request.requestBody)
+            const newInvestment = { status: 'active', ...req }
+
+            const items = schema.investments.create(newInvestment)
+
+            return {
+                message: 'Investment Successfully Opened',
+                items: items,
+                ok: true,
+            }
         })
 
         this.post('/update-user', (schema, request) => {

@@ -2,6 +2,8 @@ import React from 'react'
 import Card from './card/Card'
 
 const InvestmentManagement = ({ investments }) => {
+    const handleCardOpen = () => {}
+    
     return (
         <section className="grid-pannel w-full pb-10">
             {investments.map((elData, idx) => {
@@ -16,6 +18,7 @@ const InvestmentManagement = ({ investments }) => {
                         date={elData.date}
                         icon={<Card.Icon type={elData.type.toLowerCase()} />}
                         value={elData.value}
+                        onClick={handleCardOpen}
                     />
                 )
             })}

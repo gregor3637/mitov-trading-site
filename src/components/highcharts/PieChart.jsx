@@ -8,8 +8,9 @@ const colors = ['tomato', 'skyblue', 'lightgreen']
 
 const getPieChartOptions = (investments) => {
     const options = {
+        accessibility: { enabled: false },
         chart: {
-            backgroundColor: "#bcd0ff",
+            backgroundColor: '#bcd0ff',
             polar: true,
             type: 'line',
             animation: false,

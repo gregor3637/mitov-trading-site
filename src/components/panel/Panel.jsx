@@ -1,6 +1,7 @@
 import React from 'react'
+import PanelButton from './PanelButton'
 
-const Panel = ({ children, className, title }) => {
+const Panel = ({ children, className, title, button }) => {
     return (
         <div
             className={`${className} overflow-hidden rounded-xl border-2 border-[--panel-border] bg-gradient-to-r from-[--investments-bg-from] to-[--investments-bg-to]
@@ -13,15 +14,7 @@ const Panel = ({ children, className, title }) => {
                 >
                     {title}
                 </h1>
-                <button
-                    className="flex items-center gap-2 rounded-[--primary-button-round] border-2 border-dashed border-[--primary-button-borderColor] bg-[--primary-button-color] px-4 py-2 text-[--primary-button-textColor]
-                    hover:bg-blue-400 hover:border-transparent
-                    md:px-2"
-                >
-                    <span className="leading-1 text-3xl ">+</span>{' '}
-                    <span className="hidden md:block ">New</span>{' '}
-                    <span className="hidden lg:block">Investment</span>
-                </button>
+                {button}
             </div>
             <div
                 className="m-4 flex flex-col gap-2 lg:flex-row lg:gap-4
@@ -32,5 +25,7 @@ const Panel = ({ children, className, title }) => {
         </div>
     )
 }
+
+Panel.Button = PanelButton
 
 export default Panel

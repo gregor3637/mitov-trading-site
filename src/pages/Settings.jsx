@@ -84,7 +84,7 @@ const Settings = () => {
                         />
                     </div>
                     <button
-                        className="max-w-max rounded-lg bg-[--button-bg] px-4 py-2 text-4xl font-semibold hover:bg-[--button-bg-hover] "
+                        className="max-w-max rounded-lg bg-transparent px-4 py-2 text-4xl text-[--primary-color] font-semibold hover:bg-[--primary-color] border-2 border-[--primary-color] hover:text-[--primary-color-light]"
                         disabled={navigation.state === 'submitting'}
                     >
                         {buttonLabel}
