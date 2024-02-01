@@ -7,12 +7,27 @@ import {
 } from 'react-router-dom'
 import Layout from './components/Layout'
 import Investments from './pages/Investments'
+import Settings, {
+    loader as settingsLoader,
+    action as settingsAction,
+} from './pages/Settings'
 
 const router = createBrowserRouter(
     createRoutesFromElements(
         <Route path="/" element={<Layout />}>
-            <Route index element={<Investments />} />
-            <Route path="settings" element={<h1>@VVVVVVVVVVVVV</h1>} />
+            {/* <Route index element={<Investments />} />
+            <Route
+                path="settings"
+                element={<Settings />}
+                loader={settingsLoader}
+                action={settingsAction}
+            /> */}
+            <Route
+                index
+                element={<Settings />}
+                loader={settingsLoader}
+                action={settingsAction}
+            />
             <Route path="*" element={<h1>@XXXXXXXXXXXXXXXXX</h1>} />
         </Route>
     )
