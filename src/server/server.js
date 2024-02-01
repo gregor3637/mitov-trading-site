@@ -47,13 +47,13 @@ createServer({
             name: 'I feel lucky',
             value: '10',
         })
-        server.create('investment', {
+        server.create('investment',{
             id: '5',
-            type: 'Crypto',
-            status: 'active',
+            type: 'Land',
+            status: 'closed',
             date: '03/02/2023',
-            name: 'I feel lucky',
-            value: '10',
+            name: 'Land Two',
+            value: '1000',
         })
         server.create('investment', {
             id: '6',
@@ -62,6 +62,39 @@ createServer({
             date: '03/02/2023',
             name: 'Does it even matter at the endddddddddddddddd',
             value: '40',
+        })
+        server.create('investment', {
+            id: '7',
+            type: 'Cash',
+            status: 'active',
+            date: '03/02/2023',
+            name: 'Emergency',
+            value: '1100',
+        })
+
+        server.create('investment', {
+            id: '8',
+            type: 'Crypto',
+            status: 'active',
+            date: '03/02/2023',
+            name: 'I feel lucky',
+            value: '10',
+        })
+        server.create('investment', {
+            id: '9',
+            type: 'Property',
+            status: 'active',
+            date: '03/02/2023',
+            name: 'I feel lucky',
+            value: '50',
+        })
+        server.create('investment', {
+            id: '10',
+            type: 'Stocks',
+            status: 'closed',
+            date: '03/02/2023',
+            name: 'Casino money',
+            value: '250',
         })
     },
 
