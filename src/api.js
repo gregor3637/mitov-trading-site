@@ -1,5 +1,5 @@
-export async function updateUser(creds) {
-    const res = await fetch('/api/update-user', {
+export async function getUser(creds) {
+    const res = await fetch('/api/user', {
         method: 'post',
         body: JSON.stringify(creds),
     })
@@ -8,7 +8,26 @@ export async function updateUser(creds) {
 
     if (!res.ok) {
         throw {
-            message: data.message,
+            errorMessage: data.message,
+            statusText: res.statusText,
+            status: res.status,
+        }
+    }
+
+    return data
+}
+
+export async function updateUser(creds) {
+    const res = await fetch('/api/update-user', {
+        method: 'patch',
+        body: JSON.stringify(creds),
+    })
+
+    const data = await res.json()
+
+    if (!res.ok) {
+        throw {
+            errorMessage: data.message,
             statusText: res.statusText,
             status: res.status,
         }

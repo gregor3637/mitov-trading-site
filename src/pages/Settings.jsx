@@ -5,10 +5,12 @@ import {
     Form,
     useActionData,
 } from 'react-router-dom'
-import { updateUser } from '../api'
+import { getUser, updateUser } from '../api'
+import PageButton from '../components/PageButton'
 
 export async function loader() {
-    return true
+    const data = await getUser({ email: 'foo@foo.fo', id: '444' })
+    return data
 }
 
 export async function action({ request }) {
@@ -33,7 +35,7 @@ export async function action({ request }) {
 
 const Settings = () => {
     const actionData = useActionData() || { actionMessage: '' }
-    const loadedMessage = useLoaderData()
+    const loadedData = useLoaderData()
     const navigation = useNavigation()
 
     let buttonLabel = 'Update'
@@ -44,22 +46,31 @@ const Settings = () => {
         buttonLabel = 'Success'
     }
 
+    // const isDisabled =
+
     return (
         <div className="bg-[--sidebar-color] px-10 pb-10 text-[--text-color]">
-            <h1 className="py-10">
-                <span className="text-5xl font-extrabold text-[--text-color]">
-                    Ivestments
+            <h1 className="flex flex-col py-10 lg:block">
+                <span className="text-center text-5xl font-extrabold text-[--text-color] xl:text-start ">
+                    Settings
                 </span>
+                {loadedData.user && (
+                    <div className="flex flex-col items-center justify-center text-xl pt-4">
+                        <div className='w-max '>
+                            <div><span className='pr-4'>First name:</span>{loadedData.user.firstName}</div>
+                            <div><span className='pr-4'>Last name:</span>{loadedData.user.lastName}</div>
+                            <div className='flex justify-between'><span>Age:</span>{loadedData.user.age}</div>
+                        </div>
+                    </div>
+                )}
                 <div className="flex flex-col items-center justify-center  pt-10 font-semibold">
-                    <h1 className="text-4xl">Update your account</h1>
-                    {loadedMessage && <h3 className="red">{loadedMessage}</h3>}
-                    {actionData.actionError && (
-                        <h3 className="red">{actionData.actionError}</h3>
-                    )}
+                    <h1 className="text-center text-4xl">
+                        Update your account
+                    </h1>
                 </div>
             </h1>
 
-            <div className="h-screen">
+            <div className="sm:h-screen">
                 <Form
                     method="post"
                     className="flex flex-col items-center gap-10"
@@ -83,12 +94,10 @@ const Settings = () => {
                             className="remove-arrow appearance-none"
                         />
                     </div>
-                    <button
-                        className="max-w-max rounded-lg bg-transparent px-4 py-2 text-4xl text-[--primary-color] font-semibold hover:bg-[--primary-color] border-2 border-[--primary-color] hover:text-[--primary-color-light]"
+                    <PageButton
+                        label={buttonLabel}
                         disabled={navigation.state === 'submitting'}
-                    >
-                        {buttonLabel}
-                    </button>
+                    />
                 </Form>
             </div>
         </div>

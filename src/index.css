@@ -41,11 +41,33 @@
 
         --navigation-button-active-bg: #4b3bff;
 
-        --primary-button-color: #fff;
-        --primary-button-color-hover: #ffd000;
+        /* //------ primary ------ */
+        --primary-button-color: #695cfe;
+        --primary-button-borderColor: #695cfe;
+        --primary-button-textColor: #ffffff;
+
+        --primary-button-color-hover: #ffffff;
+        --primary-button-borderColor-hover: #695cfe;
+        --primary-button-textColor-hover: #695cfe;
+
+        --primary-button-color-disabled: #929292;
+        --primary-button-borderColor-disabled: #ff000000;
+        --primary-button-textColor-disabled: #ffffff;
+
         --primary-button-round: 4px;
-        --primary-button-borderColor: #7e7e7e;
-        --primary-button-textColor: #2f2f2f;
+
+         /* //------ secondary ------ */
+         --secondary-button-color: ffffff00;
+         --secondary-button-borderColor: #000000;
+         --secondary-button-textColor: #000000;
+ 
+         --secondary-button-color-hover: ##695cfe00;
+         --secondary-button-borderColor-hover: #695cfe;
+         --secondary-button-textColor-hover: #695cfe;
+ 
+         --secondary-button-color-disabled: #929292;
+         --secondary-button-borderColor-disabled: #ff000000;
+         --secondary-button-textColor-disabled: #ffffff;
 
         --tran-02: all 2.2s ease;
         --tran-03: all 2.3s ease;
@@ -66,16 +88,56 @@
         --toggle-track: #f6f5ff;
         --toggle-head: #6b7280;
 
+        --widget-bg: #1b63b6;
+
         --investments-bg-from: #4f1a7b;
         --investments-bg-to: #191458;
 
-        --primary-button-color: transparent;
-        --primary-button-borderColor: #fff;
+        /* //------ primary ------ */
+        --primary-button-color: #695cfe;
+        --primary-button-borderColor: #695cfe;
         --primary-button-textColor: #ffffff;
 
+        --primary-button-color-hover: #ffffff;
+        --primary-button-borderColor-hover: #ffffff;
+        --primary-button-textColor-hover: #695cfe;
+
+        --primary-button-color-disabled: #929292;
+        --primary-button-borderColor-disabled: #ff000000;
+        --primary-button-textColor-disabled: #ffffff;
+
+        --primary-button-round: 4px;
+
+         /* //------ secondary ------ */
+         --secondary-button-color: #695cfe00;
+         --secondary-button-borderColor: #695cfe;
+         --secondary-button-textColor: #695cfe;
+ 
+         --secondary-button-color-hover: #ffffff00;
+         --secondary-button-borderColor-hover: #ffffff;
+         --secondary-button-textColor-hover: #ffffff;
+ 
+         --secondary-button-color-disabled: #929292;
+         --secondary-button-borderColor-disabled: #ff000000;
+         --secondary-button-textColor-disabled: #ffffff;
+ 
+         --primary-button-round: 4px;
+
         transition: var(--tran-02);
+
+        .highcharts-background {
+            fill: var(--widget-bg) !important;
+        }
     }
 }
+
+.page-primary-button {
+    @apply border-[--primary-button-borderColor] bg-[--primary-button-color] text-[--primary-button-textColor] hover:border-[--primary-button-borderColor-hover] hover:bg-[--primary-button-textColor]  hover:text-[--primary-button-textColor-hover] disabled:border-[--primary-button-borderColor-disabled]  disabled:bg-[--primary-button-color-disabled]  disabled:text-[--primary-button-textColor-disabled];
+}
+.page-secondary-button {
+    @apply border-[--secondary-button-borderColor] bg-[--secondary-button-color] text-[--secondary-button-textColor] hover:border-[--secondary-button-borderColor-hover] hover:bg-[--secondary-button-color]  hover:text-[--secondary-button-textColor-hover] disabled:border-[--secondary-button-borderColor-disabled]  disabled:bg-[--secondary-button-color-disabled]  disabled:text-[--secondary-button-textColor-disabled];
+}
+
 
 .button {
     @apply rounded-[--primary-button-round] px-4 py-2 text-3xl font-semibold uppercase;
@@ -86,7 +148,7 @@
 }
 
 .secondary-button {
-    @apply button text-gray-600 border-2 border-gray-600 ;
+    @apply button border-2 border-gray-600 text-gray-600;
 }
 
 body {
@@ -99,16 +161,24 @@ body {
 }
 
 .nav-elem-hover {
-    @apply sm:!bg-transparent sm:hover:!bg-[--primary-color-light];
+    @apply sm:!bg-transparent sm:hover:!bg-[--primary-button-color];
+    
+    &:hover {
+        div,
+        span {
+            color: var(--primary-button-textColor) !important;
+        }
+    }
 }
 
 .nav-button {
     &.active {
-        background-color: var(--navigation-button-active-bg) !important;
+        background-color: transparent !important;
+        border: 2px solid var(--primary-button-color);
 
         div,
         span {
-            color: #fff !important;
+            color: var(--primary-button-color) !important;
         }
     }
     @apply nav-elem rounded-lg bg-[--primary-color-light] transition duration-500;

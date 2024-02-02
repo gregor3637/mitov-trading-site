@@ -4,6 +4,7 @@ import { OPTION_NOT_PICKED_VALUE, OPTIONS } from '../../card/CardIcon'
 import { formatDate } from '../../../utils/date'
 import { addInvestment } from '../../../api'
 import { useNavigate } from 'react-router-dom'
+import PrimaryButton from '../../PageButton'
 
 const NewInvestment = ({ onClose }) => {
     const [name, setName] = useState('value')
@@ -18,8 +19,10 @@ const NewInvestment = ({ onClose }) => {
     const handleTypeChange = (ev) => setType(ev.target.value)
     const handleValueChange = (ev) => setValue(ev.target.value)
 
+    const isDisabled = ![name, value, type].every(Boolean)
+
     const handleOpenNewInvestment = async () => {
-        if (![name, value, type].every(Boolean)) {
+        if (isDisabled) {
             return
         }
 
@@ -46,11 +49,19 @@ const NewInvestment = ({ onClose }) => {
     }
 
     return (
-        <div className="fixed right-0 top-20 z-50 h-[80vh] w-1/2 -translate-x-1/2 transform items-center justify-center rounded-lg bg-[--body-color]  p-4 ">
-            <div className="flex h-full flex-col items-center justify-center rounded-[--primary-button-round] border-2 border-[--edge] bg-yellow-300 p-10">
-                <div className=".content flex h-full w-full flex-col items-center justify-between bg-red-300">
-                    <div className="card-and-title mt-4 flex flex-col items-center gap-5 bg-blue-700">
-                        <h1 className="text-3xl font-semibold">
+        <div
+            className="fixed left-1/2 top-1/2 z-[300] h-[600px] w-[90%] -translate-x-1/2 -translate-y-1/2 transform rounded-lg  bg-[--body-color] p-4 
+            sm:h-[60vh] sm:w-[80%]
+            xl:h-[80vh]  xl:w-[1000px]
+           "
+        >
+            <div
+                className="flex h-full flex-col items-center justify-center rounded-[--primary-button-round] border-2 border-[--edge]  p-2 
+            md:p-10"
+            >
+                <div className="flex h-full w-full flex-col items-center justify-between">
+                    <div className="mt-4 flex flex-col items-center gap-5 ">
+                        <h1 className="!text-center text-2xl font-semibold text-[--text-color] sm:text-3xl">
                             Open New Investment Position
                         </h1>
                         <Card
@@ -61,8 +72,12 @@ const NewInvestment = ({ onClose }) => {
                         />
                     </div>
 
-                    <div className="h-full w-full bg-green-400 p-4">
-                        <div className="mx-auto flex h-full max-w-max flex-col items-center justify-center gap-5  px-10 *:rounded-lg *:p-4">
+                    <div className="h-full w-full  p-4">
+                        <div
+                            className="mx-auto flex h-full max-w-max flex-col items-center justify-center gap-5  *:rounded-lg  *:p-1 
+                        sm:*:p-4 
+                        lg:px-10 lg:*:px-10"
+                        >
                             {didCreate ? (
                                 <h1>Successful Creation</h1>
                             ) : (
@@ -77,8 +92,8 @@ const NewInvestment = ({ onClose }) => {
                                         name="type"
                                         onChange={handleTypeChange}
                                         placeholder="undecided"
-                                        className="px w-full"
-                                        value=""
+                                        className=" w-full"
+                                        value={type}
                                     >
                                         <option value="" disabled hidden>
                                             Type
@@ -116,25 +131,21 @@ const NewInvestment = ({ onClose }) => {
                 <div className="flex gap-10">
                     {!isLoading && !didCreate && (
                         <>
-                            <button
-                                className="primary-button"
+                            <PrimaryButton
+                                disabled={isDisabled}
+                                label="Open"
                                 onClick={handleOpenNewInvestment}
-                            >
-                                Open
-                            </button>
-                            <button
-                                className="secondary-button"
+                            />
+                            <PrimaryButton
+                                label="Close"
                                 onClick={onClose}
-                            >
-                                Close
-                            </button>
+                                isPrimary={false}
+                            />
                         </>
                     )}
                     {isLoading && <div>Loading .... </div>}
                     {!isLoading && didCreate && (
-                        <button className="secondary-button" onClick={onClose}>
-                            Close
-                        </button>
+                        <PrimaryButton label="Close" onClick={onClose} />
                     )}
                 </div>
             </div>

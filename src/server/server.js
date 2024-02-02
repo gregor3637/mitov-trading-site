@@ -11,25 +11,25 @@ createServer({
             id: '444',
             email: 'foo@foo.fo',
             firstName: '',
-            lastName: '',
+            lastName: 'John',
             age: '5',
         })
 
         server.create('investment', {
             id: '1',
-            type: 'Gold',
+            type: 'Stocks',
             status: 'active',
             date: '02/02/2023',
-            name: 'Safe Investment 2023',
-            value: '250',
+            name: 'Retirement illusion',
+            value: '25000',
         })
         server.create('investment', {
             id: '2',
             type: 'Crypto',
             status: 'active',
             date: '03/02/2023',
-            name: 'Gamble',
-            value: '100',
+            name: 'Honeymoon deposit',
+            value: '2500',
         })
         server.create('investment', {
             id: '3',
@@ -37,32 +37,40 @@ createServer({
             status: 'closed',
             date: '03/02/2023',
             name: 'Child College fund',
-            value: '50',
+            value: '500',
         })
-        // server.create('investment', {
-        //     id: '4',
-        //     type: 'Crypto',
-        //     status: 'active',
-        //     date: '03/02/2023',
-        //     name: 'I feel lucky',
-        //     value: '10',
-        // })
-        // server.create('investment', {
-        //     id: '5',
-        //     type: 'Land',
-        //     status: 'closed',
-        //     date: '03/02/2023',
-        //     name: 'Land Two',
-        //     value: '1000',
-        // })
-        // server.create('investment', {
-        //     id: '6',
-        //     type: 'Crypto',
-        //     status: 'active',
-        //     date: '03/02/2023',
-        //     name: 'Does it even matter at the endddddddddddddddd',
-        //     value: '40',
-        // })
+        server.create('investment', {
+            id: '4',
+            type: 'Crypto',
+            status: 'active',
+            date: '01/02/2013',
+            name: 'OG Diamon Hands',
+            value: '61234',
+        })
+        server.create('investment', {
+            id: '5',
+            type: 'Property',
+            status: 'active',
+            date: '03/02/2023',
+            name: 'Bubble of all bubbles',
+            value: '300000',
+        })
+        server.create('investment', {
+            id: '6',
+            type: 'Cash',
+            status: 'active',
+            date: '03/02/2023',
+            name: 'Printer goes Brrr',
+            value: '40000',
+        })
+        server.create('investment', {
+            id: '6',
+            type: 'Stocks',
+            status: 'active',
+            date: '03/02/2023',
+            name: 'mr. Powell gamble',
+            value: '60000',
+        })
         // server.create('investment', {
         //     id: '7',
         //     type: 'Cash',
@@ -104,12 +112,31 @@ createServer({
         this.timing = 1000
         this.passthrough('https://firestore.googleapis.com/**')
 
-        this.post('/update-user', (schema, request) => {
+        this.post('/user', (schema, request) => {
+            const { email } = JSON.parse(request.requestBody)
+            const foundUser = schema.users.findBy({ email })
+
+            if (!foundUser) {
+                return new Response(
+                    401,
+                    {},
+                    { message: 'No user with such email found!' }
+                )
+            }
+
+            return {
+                user: foundUser,
+                message: 'Account Found',
+                ok: true,
+            }
+        })
+
+        this.patch('/update-user', (schema, request) => {
             const { firstName, lastName, age, email } = JSON.parse(
                 request.requestBody
             )
 
-            const foundUser = schema.users.findBy({ email })
+            const foundUser = schema.users.findBy({ email }).update({ firstName, lastName, age })
             if (!foundUser) {
                 return new Response(
                     401,
@@ -121,6 +148,7 @@ createServer({
             return {
                 user: foundUser,
                 message: 'Account Updated',
+                ok: true,
             }
         })
 
@@ -143,7 +171,9 @@ createServer({
 
         this.patch('/close-investments', function (schema, request) {
             const req = JSON.parse(request.requestBody)
-            const item = schema.investments.find(req.id).update({status: 'closed'})
+            const item = schema.investments
+                .find(req.id)
+                .update({ status: 'closed' })
             return {
                 message: 'Investment Successfully Closed',
                 item: item,

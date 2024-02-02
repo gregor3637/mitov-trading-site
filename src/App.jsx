@@ -11,23 +11,24 @@ import Settings, {
     loader as settingsLoader,
     action as settingsAction,
 } from './pages/Settings'
+import Error from './pages/Error'
 
 const router = createBrowserRouter(
     createRoutesFromElements(
         <Route path="/" element={<Layout />}>
-            <Route index element={<Investments />} loader={investmentsLoader} />
+            <Route
+                index
+                element={<Investments />}
+                loader={investmentsLoader}
+                errorElement={<Error />}
+            />
             <Route
                 path="settings"
                 element={<Settings />}
                 loader={settingsLoader}
                 action={settingsAction}
+                errorElement={<Error />}
             />
-            {/* <Route
-                index
-                element={<Settings />}
-                loader={settingsLoader}
-                action={settingsAction}
-            /> */}
             <Route path="*" element={<h1>@XXXXXXXXXXXXXXXXX</h1>} />
         </Route>
     )
