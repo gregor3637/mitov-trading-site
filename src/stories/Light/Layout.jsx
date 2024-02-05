@@ -1,17 +1,17 @@
 import React, { useState } from 'react'
 import { Outlet } from 'react-router-dom'
 import { useClickAway, useWindowSize } from '@uidotdev/usehooks'
-import Footer from './navigation/Footer'
-import Header from './navigation/Header'
-import Sidebar from './navigation/Sidebar'
+import Footer from '../../components/navigation/Footer'
+import Header from '../../components/navigation/Header'
+import Sidebar from '../../components/navigation/Sidebar'
 import { useDispatch, useSelector } from 'react-redux'
 import {
     selectModalState,
     setIsCloseInvestmentOpen,
     setIsNewInvestmentOpen,
-} from '../redux/reducers/modalSlice'
-import NewInvestmentModal from '../components/modal/NewInvestment/NewInvestmentModal'
-import CloseInvestmentModal from '../components/modal/closeInvestment/CloseInvestmentModal'
+} from '../../services/store/reducers/modalSlice'
+import NewInvestmentModal from '../../components/modal/NewInvestment/NewInvestmentModal'
+import CloseInvestmentModal from '../../components/modal/closeInvestment/CloseInvestmentModal'
 
 const width = window.innerWidth
 const SMALL_SCREEN_WIDTH = 640

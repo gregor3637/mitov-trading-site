@@ -1,7 +1,7 @@
 import React from 'react'
 import Card from './card/Card'
 import { useDispatch } from 'react-redux'
-import { setClosingInvestment } from '../redux/reducers/modalSlice'
+import { setClosingInvestment } from '../services/store/reducers/modalSlice'
 
 const InvestmentManagement = ({ investments, onCloseExistingInvestment }) => {
     const dispatch = useDispatch()

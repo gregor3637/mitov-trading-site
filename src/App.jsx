@@ -5,7 +5,7 @@ import {
     createRoutesFromElements,
     RouterProvider,
 } from 'react-router-dom'
-import Layout from './components/Layout'
+import Layout from './stories/Light/Layout'
 import Investments, { loader as investmentsLoader } from './pages/Investments'
 import Settings, {
     loader as settingsLoader,

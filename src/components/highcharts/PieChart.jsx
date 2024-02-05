@@ -2,7 +2,7 @@ import Highcharts from 'highcharts'
 import HighchartsReact from 'highcharts-react-official'
 
 import React from 'react'
-import { convertInvestmentToDataEntry } from '../../helpers/highchart'
+import { convertInvestmentToDataEntry } from '../../utils/highchart'
 
 const colors = ['tomato', 'skyblue', 'lightgreen']
 

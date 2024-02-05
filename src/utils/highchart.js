@@ -1,4 +1,4 @@
-import { allocationByCategoryReducer } from '../utils/portfolio'
+import { allocationByCategoryReducer } from './portfolio'
 
 export const convertInvestmentToDataEntry = (investments, colors) => {
     return Object.entries(

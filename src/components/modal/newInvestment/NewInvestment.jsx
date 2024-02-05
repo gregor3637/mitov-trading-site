@@ -2,9 +2,9 @@ import React, { useState } from 'react'
 import Card from '../../card/Card'
 import { OPTION_NOT_PICKED_VALUE, OPTIONS } from '../../card/CardIcon'
 import { formatDate } from '../../../utils/date'
-import { addInvestment } from '../../../api'
 import { useNavigate } from 'react-router-dom'
-import PrimaryButton from '../../PageButton'
+import PrimaryButton from '../../ui/PageButton'
+import { addInvestment } from '../../../services/server/api'
 
 const NewInvestment = ({ onClose }) => {
     const [name, setName] = useState('value')

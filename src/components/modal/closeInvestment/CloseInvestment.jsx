@@ -1,8 +1,8 @@
 import React, { useState } from 'react'
 import Card from '../../card/Card'
-import { closeInvestment } from '../../../api'
 import { useNavigate } from 'react-router-dom'
-import PageButton from '../../PageButton'
+import PageButton from '../../ui/PageButton'
+import { closeInvestment } from '../../../services/server/api'
 
 const CloseInvestment = ({ onClose, invData }) => {
     const [isSuccessfulClose, setIsSuccessfulClose] = useState(false)

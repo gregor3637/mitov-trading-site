@@ -1,20 +1,17 @@
-import React, { useState } from 'react'
+import React from 'react'
 import { useLoaderData } from 'react-router-dom'
-import { useDispatch, useSelector } from 'react-redux'
+import { useDispatch } from 'react-redux'
 import PieChart from '../components/highcharts/PieChart'
 import InvestedValue from '../components/InvestedValue'
-import Widget from '../components/Widget'
+import Widget from '../components/ui/Widget'
 import InvestmentsStatus from '../components/InvestmentsStatus'
 import InvestmentManagement from '../components/InvestmentManagement'
-import Panel from '../components/panel/Panel'
-import { getInvestments } from '../api'
-import NewInvestmentModal from '../components/modal/NewInvestment/NewInvestmentModal'
-import CloseInvestmentModal from '../components/modal/closeInvestment/CloseInvestmentModal'
+import Panel from '../components/ui/panel/Panel'
 import {
-    selectModalState,
     setIsNewInvestmentOpen,
     setIsCloseInvestmentOpen,
-} from '../redux/reducers/modalSlice'
+} from '../services/store/reducers/modalSlice'
+import { getInvestments } from '../services/server/api'
 
 export async function loader() {
     const investments = await getInvestments()
@@ -25,7 +22,8 @@ const Investments = () => {
     const investments = useLoaderData()
     const dispatch = useDispatch()
     const handleOpenNewInvestment = () => dispatch(setIsNewInvestmentOpen(true))
-    const handleCloseExistingInvestment = () => dispatch(setIsCloseInvestmentOpen(true))
+    const handleCloseExistingInvestment = () =>
+        dispatch(setIsCloseInvestmentOpen(true))
 
     return (
         <>

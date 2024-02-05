@@ -1,12 +1,8 @@
 import React from 'react'
-import {
-    useLoaderData,
-    useNavigation,
-    Form,
-    useActionData,
-} from 'react-router-dom'
-import { getUser, updateUser } from '../api'
-import PageButton from '../components/PageButton'
+import { useLoaderData, useNavigation, useActionData } from 'react-router-dom'
+import { getUser, updateUser } from '../services/server/api'
+import PersonalForm from '../components/ui/UpdateInfoForm/UpdateInfoForm'
+import personalInfoRequest from '../services/server/personalInfoRequest'
 
 export async function loader() {
     const data = await getUser({ email: 'foo@foo.fo', id: '444' })
@@ -14,10 +10,7 @@ export async function loader() {
 }
 
 export async function action({ request }) {
-    const formData = await request.formData()
-    const firstName = formData.get('firstName')
-    const lastName = formData.get('lastName')
-    const age = formData.get('age')
+    const { firstName, lastName, age } = personalInfoRequest(request)
 
     try {
         const data = await updateUser({
@@ -46,60 +39,23 @@ const Settings = () => {
         buttonLabel = 'Success'
     }
 
-    // const isDisabled =
-
     return (
         <div className="bg-[--sidebar-color] px-10 pb-10 text-[--text-color]">
             <h1 className="flex flex-col py-10 lg:block">
                 <span className="text-center text-5xl font-extrabold text-[--text-color] xl:text-start ">
                     Settings
                 </span>
-                {loadedData.user && (
-                    <div className="flex flex-col items-center justify-center text-xl pt-4">
-                        <div className='w-max '>
-                            <div><span className='pr-4'>First name:</span>{loadedData.user.firstName}</div>
-                            <div><span className='pr-4'>Last name:</span>{loadedData.user.lastName}</div>
-                            <div className='flex justify-between'><span>Age:</span>{loadedData.user.age}</div>
-                        </div>
-                    </div>
-                )}
                 <div className="flex flex-col items-center justify-center  pt-10 font-semibold">
                     <h1 className="text-center text-4xl">
                         Update your account
                     </h1>
                 </div>
             </h1>
-
-            <div className="sm:h-screen">
-                <Form
-                    method="post"
-                    className="flex flex-col items-center gap-10"
-                    replace
-                >
-                    <div className="mx-auto flex max-w-max flex-col items-center justify-center gap-5  px-10 *:rounded-lg *:p-4">
-                        <input
-                            name="firstName"
-                            type="text"
-                            placeholder="First Name"
-                        />
-                        <input
-                            name="lastName"
-                            type="text"
-                            placeholder="Last Name"
-                        />
-                        <input
-                            name="age"
-                            type="number"
-                            placeholder="Age"
-                            className="remove-arrow appearance-none"
-                        />
-                    </div>
-                    <PageButton
-                        label={buttonLabel}
-                        disabled={navigation.state === 'submitting'}
-                    />
-                </Form>
-            </div>
+            <PersonalForm
+                userData={loadedData.user}
+                submitButtonLabel={buttonLabel}
+                isSubmitting={navigation.state === 'submitting'}
+            />
         </div>
     )
 }
