@@ -11,10 +11,11 @@ import {
     setIsNewInvestmentOpen,
     setIsCloseInvestmentOpen,
 } from '../services/store/reducers/modalSlice'
-import { getInvestments } from '../services/server/api'
+import { getDotInvestments, getInvestments } from '../services/server/api'
 
 export async function loader() {
-    const investments = await getInvestments()
+    // const investments = await getInvestments()
+    const investments = await getDotInvestments()
     return investments
 }
 
@@ -24,6 +25,8 @@ const Investments = () => {
     const handleOpenNewInvestment = () => dispatch(setIsNewInvestmentOpen(true))
     const handleCloseExistingInvestment = () =>
         dispatch(setIsCloseInvestmentOpen(true))
+
+    // // return <div>@@@@@@@@@</div>
 
     return (
         <>

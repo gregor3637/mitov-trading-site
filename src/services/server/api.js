@@ -1,3 +1,9 @@
+import axios from 'axios'
+
+const axiosInstance = axios.create({
+    baseURL: 'https://localhost:7047/Investments',
+})
+
 export async function getUser(creds) {
     const res = await fetch('/api/user', {
         method: 'post',
@@ -85,3 +91,24 @@ export async function closeInvestment(creds) {
     const data = await res.json()
     return data
 }
+//------------------------------------------
+export async function getDotInvestments() {
+    const { data } = await axiosInstance.get()
+
+    return data
+}
+
+export async function addDotInvestment(creds) {
+    const { data } = await axiosInstance.post("",creds)
+
+    return  {...data, ok: true}
+}
+
+export async function closeDotInvestment(creds) {
+    const { data } = await axiosInstance.put(`?id=${creds.id}`,creds)
+
+    return {...data, ok: true}
+}
+
+
+

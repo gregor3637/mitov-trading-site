@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import Card from '../../card/Card'
 import { useNavigate } from 'react-router-dom'
 import PageButton from '../../ui/PageButton'
-import { closeInvestment } from '../../../services/server/api'
+import { closeDotInvestment, closeInvestment } from '../../../services/server/api'
 
 const CloseInvestment = ({ onClose, invData }) => {
     const [isSuccessfulClose, setIsSuccessfulClose] = useState(false)
@@ -14,12 +14,16 @@ const CloseInvestment = ({ onClose, invData }) => {
         setLoading(true)
         setError('')
         try {
-            const response = await closeInvestment({
+            // const response = await closeInvestment({
+            //     id: invData.id,
+            // })
+            const response = await closeDotInvestment({
                 id: invData.id,
             })
             if (!response.ok) {
                 throw new Error('Network response was not ok')
             }
+            
             setIsSuccessfulClose(true)
             navigate('/')
         } catch (error) {

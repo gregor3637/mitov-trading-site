@@ -4,7 +4,7 @@ import { OPTION_NOT_PICKED_VALUE, OPTIONS } from '../../card/CardIcon'
 import { formatDate } from '../../../utils/date'
 import { useNavigate } from 'react-router-dom'
 import PrimaryButton from '../../ui/PageButton'
-import { addInvestment } from '../../../services/server/api'
+import { addDotInvestment, addInvestment } from '../../../services/server/api'
 
 const NewInvestment = ({ onClose }) => {
     const [name, setName] = useState('value')
@@ -28,11 +28,13 @@ const NewInvestment = ({ onClose }) => {
 
         setLoading(true)
         try {
-            const response = await addInvestment({
+            // const response = await addInvestment({
+            const response = await addDotInvestment({
                 name,
                 value,
                 type,
                 date,
+                status: 'active'
             })
 
             if (!response.ok) {

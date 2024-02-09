@@ -13,11 +13,11 @@ const InvestmentManagement = ({ investments, onCloseExistingInvestment }) => {
 
     return (
         <section className="grid-pannel w-full pb-10">
-            {investments.map((invData, idx) => {
+            {investments.filter(x => x.type !== 'string').map((invData, idx) => {
                 return (
                     <Card
                         key={idx}
-                        isActive={invData.status === 'active'}
+                        isActive={invData.status.toLowerCase() === 'active'}
                         status={<Card.Status status={invData.status} />}
                         name={invData.name}
                         date={invData.date}
