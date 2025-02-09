@@ -4,6 +4,8 @@ import { argosScreenshot } from "@argos-ci/playwright";
 
 
 test('should work', async ({ page }) => {
+  await page.waitForTimeout(2000);
+  
   await page.goto('http://localhost:5173/');
   await page.screenshot("screenshot - test");
   // await argosScreenshot(page, "This is title - homepage 1");
